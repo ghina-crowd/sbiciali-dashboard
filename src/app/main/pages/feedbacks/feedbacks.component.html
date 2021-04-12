@@ -1,0 +1,92 @@
+<div class="page-layout simple tabbedm p-16 feedback" id="deals">
+    <h1>Feedbacks</h1>
+    <div class="w-100-p">
+        <mat-form-field class="w-25-p p-16 filter">
+            <input (keyup)="applyFilter($event.target.value)" matInput placeholder="Search By Title">
+        </mat-form-field>
+
+    </div>
+    <table [dataSource]="dataSource" class="mat-elevation-z8 w-100-p p-16" mat-table>
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="type" class="">
+            <th *matHeaderCellDef mat-header-cell> Type</th>
+            <td *matCellDef="let element" mat-cell>
+                <span *ngIf="element.type == 2">Partner</span>
+                <span *ngIf="element.type == 1">Normal</span>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="details" class="">
+            <th *matHeaderCellDef mat-header-cell> Detials</th>
+            <td *matCellDef="let element" mat-cell> {{element.details}}  </td>
+        </ng-container>
+
+        <ng-container matColumnDef="name" class="">
+            <th *matHeaderCellDef mat-header-cell>Name</th>
+            <td *matCellDef="let element" mat-cell> {{element.name}}  </td>
+        </ng-container>
+        <ng-container matColumnDef="phone" class="">
+            <th *matHeaderCellDef mat-header-cell>Phone</th>
+            <td *matCellDef="let element" mat-cell> {{element.phone}}  </td>
+        </ng-container>
+        <ng-container matColumnDef="email" class="">
+            <th *matHeaderCellDef mat-header-cell>Email</th>
+            <td *matCellDef="let element" mat-cell> {{element.email}}  </td>
+        </ng-container>
+        <ng-container matColumnDef="date" class="">
+            <th *matHeaderCellDef mat-header-cell>Date</th>
+            <td *matCellDef="let element" mat-cell> {{element.createdAt | date: 'dd/MM/yyyy'}}  </td>
+        </ng-container>
+
+        <ng-container matColumnDef="facebook" class="">
+            <th *matHeaderCellDef mat-header-cell>Facebook</th>
+            <td *matCellDef="let element" mat-cell>
+                <div *ngIf="element.type == 2">
+                    <a [href]="element.facebooklink" target="_blank">Link</a>
+                    <div>
+                        Followers: {{element.facebook_followers}}
+                    </div>
+
+                </div>
+
+                <div *ngIf="element.type == 1">
+                    -
+                </div>
+            </td>
+
+        </ng-container>
+
+
+        <ng-container matColumnDef="instagram" class="">
+            <th *matHeaderCellDef mat-header-cell>Instagram</th>
+            <td *matCellDef="let element" mat-cell>
+                <div *ngIf="element.type == 2">
+                    <a [href]="element.instagramlink" target="_blank">Link</a>
+                    <div>
+                        Followers: {{element.instagram_followers}}
+                    </div>
+                </div>
+                <div *ngIf="element.type == 1">
+                    -
+                </div>
+
+            </td>
+
+
+        </ng-container>
+
+
+        <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+        <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+
+    </table>
+
+    <mat-paginator class="w-100-p" [length]="length" (click)="getFeedbacks()"
+                   [pageSize]="pagination.limit"
+                   (page)="pageEvent = $event"
+    >
+    </mat-paginator>
+
+
+</div>

@@ -1,0 +1,79 @@
+<div id="about" class="p-24" fxLayout="row wrap">
+    <form name="providerForm" class="d-flex flex-column   my-10" [formGroup]="personalInformation" novalidate>
+
+        <div>
+            <mat-form-field appearance="outline" class="w-100-p">
+                <mat-label>First name</mat-label>
+                <input matInput formControlName="first_name">
+                <mat-error>
+                    First name name is required
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="w-100-p">
+                <mat-label>Last name</mat-label>
+                <input matInput formControlName="last_name">
+                <mat-error>
+                    Last name name is required
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="w-100-p">
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email" readonly>
+                <mat-icon matSuffix class="secondary-text">mail</mat-icon>
+                <mat-error *ngIf="personalInformation.get('email').hasError('required')" >
+                    Email is required
+                </mat-error>
+                <mat-error
+                    *ngIf="!personalInformation.get('email').hasError('required') &&
+                                personalInformation.get('email').hasError('email')">
+                    Please enter a valid email address
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="w-100-p">
+                <mat-label>Mobile number</mat-label>
+                <input matInput formControlName="phone">
+                <mat-error>
+                    Phone is required
+                </mat-error>
+            </mat-form-field>
+
+
+<!--            <mat-form-field appearance="outline" class="w-100-p">-->
+<!--                <mat-label>Password</mat-label>-->
+<!--                <input matInput type="password" formControlName="old_password" maxlength="16">-->
+<!--                <mat-icon matSuffix class="secondary-text">vpn_key</mat-icon>-->
+<!--                <mat-error *ngIf="personalInformation.get('old_password').hasError('required')">-->
+<!--                    Password is required-->
+<!--                </mat-error>-->
+<!--                <mat-error *ngIf="personalInformation.get('old_password').hasError('minlength')" >Password should be between 8 and 16 characters </mat-error>-->
+
+<!--            </mat-form-field>-->
+<!--            <mat-form-field appearance="outline" class="w-100-p">-->
+<!--                <mat-label>New password</mat-label>-->
+<!--                <input matInput type="password" formControlName="new_password" maxlength="16">-->
+<!--                <mat-icon matSuffix class="secondary-text">vpn_key</mat-icon>-->
+<!--                <mat-error *ngIf="personalInformation.get('new_password').hasError('required')">-->
+<!--                    new Password is required-->
+<!--                </mat-error>-->
+<!--                <mat-error *ngIf="personalInformation.get('new_password').hasError('minlength')" >Password should be between 8 and 16 characters </mat-error>-->
+
+
+<!--            </mat-form-field>-->
+<!--            <mat-form-field appearance="outline" class="w-100-p">-->
+<!--                <mat-label>Confirm password</mat-label>-->
+<!--                <input matInput type="password" formControlName="passwordConfirm" maxlength="16">-->
+<!--                <mat-icon matSuffix class="secondary-text">vpn_key</mat-icon>-->
+<!--                <mat-error>-->
+<!--                    Confirm password  is not matching-->
+<!--                </mat-error>-->
+<!--            </mat-form-field>-->
+            <button mat-raised-button color="accent" class="submit-button w-100-p" aria-label="LOGIN"
+                    [disabled]="personalInformation.invalid " (click)="onSubmit()">
+                Submit
+            </button>
+        </div>
+
+    </form>
+
+
+</div>

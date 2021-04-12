@@ -1,0 +1,18 @@
+.d-flex{
+    display: flex;
+    justify-content: start;
+    flex-wrap: wrap;
+    margin: 10px;
+    .shop-img{
+        width: 12rem;
+    }
+
+    .close{
+        top: -17px;
+        left: -17px;
+    }
+
+    .upload-file{
+        margin: 0 !important;
+    }
+}

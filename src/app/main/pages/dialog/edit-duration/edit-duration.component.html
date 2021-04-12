@@ -1,0 +1,69 @@
+<div id="new_branch" class="page-layout simple tabbed">
+
+    <div id="" class="edit-dialog" fxLayout="row wrap">
+        <form name="providerForm" class="d-flex flex-column   my-10" [formGroup]="durationForm" novalidate>
+            <h1 *ngIf="data">Edit Duration</h1>
+            <h1 *ngIf="!data">New Duration</h1>
+            <div class="new_branch">
+
+
+                <mat-form-field appearance="outline" class="w-100-p">
+                    <mat-label>Type</mat-label>
+                    <mat-select formControlName="type">
+                        <mat-option value="video">
+                            Video
+                        </mat-option>
+                        <mat-option value="stories">
+                            Story
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="" *ngIf="f.type.value == 'video'">
+                    <mat-label>Duration</mat-label>
+                    <input matInput formControlName="costCounter">
+                    <mat-error>
+                        Duration is required
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="" *ngIf="f.type.value == 'stories'">
+                    <mat-label>Duration</mat-label>
+                    <input matInput formControlName="range">
+                    <mat-error>
+                        Duration is required
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="w-100-p">
+                    <mat-label>Unites</mat-label>
+                    <mat-select formControlName="unit">
+                        <mat-option *ngFor="let item of unites" [value]="item._id" >
+                            {{item.title_en}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+
+                <div class="col-md-12 mt-48">
+                    <button mat-raised-button color="accent" class="submit-button " aria-label="ADD" *ngIf="data"
+                            [disabled]="durationForm.invalid "
+                            (click)="onSubmit()">
+                        Edit
+                    </button>
+                    <button mat-raised-button color="accent" class="submit-button " aria-label="ADD" *ngIf="!data"
+                            [disabled]="durationForm.invalid "
+                            (click)="addNewDuration()">
+                        Add
+                    </button>
+                    <button mat-raised-button color="accent" class="submit-button mx-8" aria-label="ADD"
+                            (click)="close()">
+                        Close
+                    </button>
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+
+</div>

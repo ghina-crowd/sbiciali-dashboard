@@ -1,0 +1,70 @@
+<div class="page-layout simple tabbedm p-16 categories" id="deals">
+    <h1>Durations</h1>
+    <div class="w-100-p">
+        <mat-form-field class="w-25-p p-16 filter">
+            <input (keyup)="applyFilter($event.target.value)" matInput placeholder="Search By Title">
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="w-100-p">
+            <mat-label>Type</mat-label>
+            <mat-select   (click)="getDurations('video')">
+                <mat-option value="video" (click)="getDurations('video')">
+                    Video
+                </mat-option>
+                <mat-option value="stories" (click)="getDurations('stories')">
+                    Story
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <button aria-label="EDIT" class="submit-button float-right add-button" color="accent" mat-raised-button
+                (click)="openAddDialog()">
+            <img src="https://img.icons8.com/ultraviolet/40/000000/add.png"> Add New Duration
+        </button>
+    </div>
+    <table [dataSource]="dataSource" class="mat-elevation-z8 w-100-p p-16" mat-table>
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="_id" class="">
+            <th *matHeaderCellDef mat-header-cell> No.</th>
+            <td *matCellDef="let element" mat-cell> {{element._id}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="duration" class="">
+            <th *matHeaderCellDef mat-header-cell>Range</th>
+            <td *matCellDef="let element" mat-cell>
+                <span *ngIf="element.range"> {{element.range}}</span>
+                <span *ngIf="element.costCounter"> {{element.costCounter}}</span>
+            </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="type" class="">
+            <th *matHeaderCellDef mat-header-cell>Type</th>
+            <td *matCellDef="let element" mat-cell> {{element.type}}  </td>
+        </ng-container>
+
+        <ng-container matColumnDef="unit" class="">
+            <th *matHeaderCellDef mat-header-cell> unit</th>
+            <td *matCellDef="let element" mat-cell> {{element.unit.title_en}}  </td>
+        </ng-container>
+
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="action">
+            <th *matHeaderCellDef mat-header-cell> Action</th>
+            <td *matCellDef="let element" mat-cell>
+                <button aria-label="EDIT" class="submit-button action m-4" color="accent" mat-raised-button
+                        (click)="openEditDialog(element)">
+                    Edit
+                </button>
+                <button aria-label="EDIT" class="submit-button m-4 action" color="accent" mat-raised-button
+                        (click)="deleteDuration(element._id)" >
+                    Delete
+                </button>
+            </td>
+        </ng-container>
+        <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+        <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+
+    </table>
+
+</div>

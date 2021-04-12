@@ -1,0 +1,49 @@
+<div class="page-layout simple tabbedm p-16 categories" id="deals">
+    <h1>Categories</h1>
+    <div class="w-100-p">
+        <mat-form-field class="w-25-p p-16 filter">
+            <input (keyup)="applyFilter($event.target.value)" matInput placeholder="Search By Title">
+        </mat-form-field>
+
+    </div>
+    <table [dataSource]="dataSource" class="mat-elevation-z8 w-100-p p-16" mat-table>
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="content" class="">
+            <th *matHeaderCellDef mat-header-cell>Content</th>
+            <td *matCellDef="let element" mat-cell  [innerHTML]="decode( element.content_ar) |  slice: 0 : 50">  </td>
+        </ng-container>
+
+        <ng-container matColumnDef="type" class="">
+            <th *matHeaderCellDef mat-header-cell> type </th>
+            <td *matCellDef="let element" mat-cell>
+                <span *ngIf="element.type == 1">about services</span>
+                <span *ngIf="element.type == 2">Video live</span>
+                <span *ngIf="element.type == 3">Ads request</span>
+                <span *ngIf="element.type == 4">Events</span>
+                <span *ngIf="element.type == 5">Hour with Star</span>
+                <span *ngIf="element.type == 6">Terms&condition</span>
+                <span *ngIf="element.type == 7">Privacy Policy</span>
+
+          </td>
+        </ng-container>
+
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="action">
+            <th *matHeaderCellDef mat-header-cell> Action</th>
+            <td *matCellDef="let element" mat-cell>
+                <button aria-label="EDIT" class="submit-button action m-4" color="accent" mat-raised-button
+                        (click)="openEditDialog(element)">
+                    Edit
+                </button>
+            </td>
+        </ng-container>
+
+
+        <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+        <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+
+    </table>
+
+</div>

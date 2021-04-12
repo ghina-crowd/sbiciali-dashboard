@@ -1,0 +1,243 @@
+<div class="page-layout simple tabbedm p-16 " id="deals">
+
+    <div id="" class="" fxLayout="row wrap">
+        <form name="providerForm" class="mat-elevation-z8 w-100-p p-16" [formGroup]="UserForm" novalidate>
+            <h1 *ngIf="id != '0'">Edit User</h1>
+            <h1 *ngIf="id == '0'">New User</h1>
+            <div class="new_branch">
+                <div class="d-flex">
+                    <mat-form-field appearance="outline" class="">
+                        <mat-label>English Name</mat-label>
+                        <input matInput formControlName="name_v2_en">
+                        <mat-error>
+                            English Full Name is required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <mat-form-field appearance="outline" class="w-100-p">
+                    <mat-label>Arabic Name</mat-label>
+                    <input matInput formControlName="name_v2_ar">
+                    <mat-error>
+                        Arabic Full Name is required
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="w-100-p">
+                    <mat-label>Email</mat-label>
+                    <input matInput formControlName="email">
+                    <mat-error>
+                        Email is required
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="w-100-p">
+                    <mat-label>Mobile number</mat-label>
+                    <input matInput formControlName="phone">
+                    <mat-error>
+                        Mobile number is required
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Gender</mat-label>
+                    <mat-select formControlName="gender">
+                        <mat-option value="female">
+                            Femlae
+                        </mat-option>
+                        <mat-option value="male">
+                            Male
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field class="w-100-p" appearance="outline">
+                    <mat-label>Birthday</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="birthday" readonly>
+                    <mat-datepicker-toggle matSuffix [for]="picker">
+                        <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="w-100-p">
+                    <mat-label>Select Category</mat-label>
+                    <mat-select matNativeControl formControlName="category">
+                        <mat-option value="" selected></mat-option>
+                        <mat-option [value]="item._id" *ngFor="let item of categories">{{item.title_en}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="w-100-p">
+                    <mat-label>Select Country</mat-label>
+                    <mat-select matNativeControl formControlName="country">
+                        <mat-option value="" selected></mat-option>
+                        <mat-option [value]="item._id" *ngFor="let item of countries">{{item.title_en}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="w-100-p">
+                    <mat-label>City</mat-label>
+                    <input matInput formControlName="city">
+                    <mat-error>
+                        City is required
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="w-100-p">
+                    <mat-label>Profession</mat-label>
+                    <input matInput formControlName="profession">
+                    <mat-error>
+                        Profession is required
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="w-100-p">
+                    <mat-label>English Description</mat-label>
+                    <textarea matInput formControlName="description_v2_en"></textarea>
+                    <mat-error>
+                        Description is required
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="w-100-p">
+                    <mat-label>Arabic Description</mat-label>
+                    <textarea matInput formControlName="description_v2_ar"></textarea>
+                    <mat-error>
+                        Description is required
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="w-100-p">
+                    <mat-label>Youtube</mat-label>
+                    <input matInput formControlName="youtube">
+                    <mat-error>
+                        Youtube is required
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="w-100-p">
+                    <mat-label>Youtube followers Count</mat-label>
+                    <input matInput formControlName="youtube_count" type="text">
+                    <mat-error>
+                        Youtube followers Count is required
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="w-100-p">
+                    <mat-label>Instagram</mat-label>
+                    <input matInput formControlName="instagram">
+                    <mat-error>
+                        Instagram is required
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="w-100-p">
+                    <mat-label>Youtube followers Count</mat-label>
+                    <input matInput formControlName="instagram_count" type="text">
+                    <mat-error>
+                        Instagram followers Count is required
+                    </mat-error>
+                </mat-form-field>
+                <!--                <mat-form-field appearance="outline" class="w-100-p">-->
+                <!--                    <mat-label>Youtube</mat-label>-->
+                <!--                    <input matInput formControlName="youtube">-->
+                <!--                    <mat-error>-->
+                <!--                        Twitter is required-->
+                <!--                    </mat-error>-->
+                <!--                </mat-form-field>-->
+                <!--                <mat-form-field appearance="outline" class="w-100-p">-->
+                <!--                    <mat-label>Snapchat</mat-label>-->
+                <!--                    <input matInput formControlName="snapchat">-->
+                <!--                    <mat-error>-->
+                <!--                        Snapchat is required-->
+                <!--                    </mat-error>-->
+                <!--                </mat-form-field>-->
+                <mat-form-field appearance="outline" class="w-100-p">
+                    <mat-label>Facebook</mat-label>
+                    <input matInput formControlName="facebook">
+                    <mat-error>
+                        Facebook is required
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="w-100-p">
+                    <mat-label>Facebook followers Count</mat-label>
+                    <input matInput formControlName="facebook_count" type="text">
+                    <mat-error>
+                        Facebook followers Count is required
+                    </mat-error>
+                </mat-form-field>
+
+                <div class="upload-file form-group mt-24">
+                    <h3><span class="required-star">*</span> Cover Photos </h3>
+                    <div class="form-group">
+                        <button (click)="openDialog('cover')" class="submit-button   upload "
+                                name="image">Cover Image
+                        </button>
+                    </div>
+                    <img class="shop-img mt-8" [src]="restService.baseUrl + '/uploads/medium/' + f.cover_image.value"
+                         alt="">
+                </div>
+
+
+                <div class="upload-file form-group mt-24">
+                    <h3><span class="required-star">*</span> Upload Photos </h3>
+                    <div class="form-group">
+                        <button (click)="openDialog('image')" class="submit-button   upload "
+                                name="image">Upload Image
+                        </button>
+                    </div>
+                    <div class="images w-100-p mt-32">
+                        <div class="my-16 position-relative p-8" *ngFor="let item of imagesUploaded">
+                            <img class=" position-absolute close" (click)="deleteImageUploaded(item._id)"
+                                 src="assets/images/logos/close.png">
+                            <img class="celebrity-img" [src]="restService.baseUrl + '/uploads/medium/' + item.url"
+                                 alt="">
+                        </div>
+                        <div class="my-16 position-relative p-8" *ngFor="let item of images">
+                            <button class="position-absolute explore " *ngIf="!item.isExplore"
+                                    (click)="explore(item._id , true , 'old_image')">Explore
+                            </button>
+                            <button class="position-absolute explore bg-orange" *ngIf="item.isExplore"
+                                    (click)="explore(item._id , false , 'old_image' )">UnExplore
+                            </button>
+                            <img class=" position-absolute close" (click)="deleteImage(item._id)"
+                                 src="assets/images/logos/close.png">
+                            <img class="celebrity-img" [src]="restService.baseUrl + '/uploads/medium/' + item.url"
+                                 alt="">
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3><span class="required-star">*</span> Videos </h3>
+                    <div class="images w-100-p mt-32">
+
+                        <div class="my-16 position-relative p-8" *ngFor="let item of videosList">
+                            <button class="position-absolute explore " *ngIf="!item.isExplore"
+                                    (click)="explore(item._id , true , 'video')">Explore
+                            </button>
+                            <button class="position-absolute explore bg-orange" *ngIf="item.isExplore"
+                                    (click)="explore(item._id , false , 'video' )">UnExplore
+                            </button>
+                            <video width="400" controls>
+                                <source [src]="restService.baseUrl + item.url" type="video/mp4">
+                                <source [src]="restService.baseUrl + item.url" type="video/ogg">
+                                Your browser does not support HTML video.
+                            </video>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-12 mt-48">
+                    <button mat-raised-button color="accent" class="submit-button " aria-label="ADD" *ngIf="id == '0'"
+                            [disabled]="UserForm.invalid "
+                            (click)="createCelebrity()">
+                        Add
+                    </button>
+                    <button mat-raised-button color="accent" class="submit-button " aria-label="ADD" *ngIf="id != '0'"
+
+                            (click)="EditCelebrity()">
+                        Edit
+                    </button>
+
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+
+</div>

@@ -1,0 +1,33 @@
+.images{
+    display: flex;
+    justify-content: start;
+    flex-wrap: wrap;
+
+    .celebrity-img{
+        width: 18rem;
+    }
+}
+
+.explore{
+    border-radius: 50%;
+    width: 8rem;
+    height: 8rem;
+    top: -24px;
+    right: 30%;
+    cursor: pointer;
+    z-index: 10;
+
+}
+
+.bg-orange{
+    background: #ff5722;
+}
+
+.close{
+    top: -6px;
+    left: 0;
+}
+
+video{
+    height: 18rem;
+}

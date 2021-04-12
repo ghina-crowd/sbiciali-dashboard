@@ -1,0 +1,77 @@
+<div id="new_branch" class="page-layout simple tabbed">
+
+    <div id="" class="p-24" fxLayout="row wrap">
+        <div class="w-100-p">
+            <mat-form-field class="w-30-p p-16">
+                <input (keyup)="applyFilter($event.target.value)" matInput placeholder="Search">
+            </mat-form-field>
+
+        </div>
+        <table [dataSource]="dataSource" class="mat-elevation-z8 w-100-p p-16" mat-table>
+
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+                <th *matHeaderCellDef mat-header-cell>  Name</th>
+                <td *matCellDef="let element" mat-cell> {{element.name_v2_en}} </td>
+            </ng-container>
+
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="email">
+                <th *matHeaderCellDef mat-header-cell> Email</th>
+                <td *matCellDef="let element" mat-cell> {{element.email}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="phone">
+                <th *matHeaderCellDef mat-header-cell> Phone</th>
+                <td *matCellDef="let element" mat-cell> {{element.phone}} </td>
+            </ng-container>
+
+
+            <ng-container matColumnDef="active">
+                <th *matHeaderCellDef mat-header-cell> Status</th>
+                <td *matCellDef="let element" mat-cell>
+                    <span class="unactive"  *ngIf="element.active == 0">Unactive</span>
+                    <span class="active"  *ngIf="element.active == 1">Active</span>
+                    <span class="block"  *ngIf="element.active == 2">Blocked</span>
+                </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="action">
+                <th *matHeaderCellDef mat-header-cell> Action</th>
+                <td *matCellDef="let element" mat-cell class="py-8">
+
+                    <button aria-label="details" *ngIf="element.active == 2" class="submit-button mx-4 my-4" color="accent"
+                            mat-raised-button (click)="confirmeActiveBlock(element , 1)">
+                        Unblock
+                    </button>
+                    <button aria-label="details" *ngIf="element.active !== 2" class="submit-button mx-4 my-4" color="accent"
+                            mat-raised-button (click)="confirmeActiveBlock(element , 2)">
+                        Block
+                    </button>
+                    <button aria-label="details" class="submit-button mx-4 my-4" color="accent" mat-raised-button
+                            [routerLink]="'/pages/new-user/' + element._id">
+                        Edit
+                    </button>
+                </td>
+            </ng-container>
+
+            <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+            <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+
+        </table>
+
+        <mat-paginator class="w-100-p" [length]="length" (click)="getUsers()"
+                       [pageSize]="pagination.limit"
+                       (page)="pageEvent = $event"
+        >
+        </mat-paginator>
+
+
+
+    </div>
+
+
+</div>

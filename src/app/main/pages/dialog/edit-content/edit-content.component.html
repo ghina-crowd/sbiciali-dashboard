@@ -1,0 +1,42 @@
+<div class="add-content ">
+    <form role="form" [formGroup]="contentForm" accept-charset="UTF-8" novalidate style="margin: 30px;">
+
+        <h4>Content in english</h4>
+        <ckeditor  required formControlName="content_en"
+
+                   [config]="ckeConfig" debounce="500">
+
+        </ckeditor>
+        <h4>Content in arabic</h4>
+
+        <ckeditor class="right"  required formControlName="content_ar"
+
+                  [config]="ckeConfig" debounce="500">
+
+        </ckeditor>
+
+        <div class="mt-16">
+            <mat-form-field appearance="fill">
+                <mat-label>Type</mat-label>
+                <mat-select    formControlName="type">
+                    <mat-option value="1">about services</mat-option>
+                    <mat-option value="2">Video live</mat-option>
+                    <mat-option value="3">Ads request</mat-option>
+                    <mat-option value="4">Events</mat-option>
+                    <mat-option value="5">Hour with Star</mat-option>
+                    <mat-option value="6">Terms&condition</mat-option>
+                    <mat-option value="7">Privacy Policy</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+
+
+        <button (click)="onSubmit()" aria-label="ADD" [disabled]="contentForm.invalid"
+                class="submit-button mx-16 my-24" color="accent"
+                mat-raised-button>
+            Update
+        </button>
+        <button class="submit-button  my-24" (click)="dialogRef.close()" color="" mat-raised-button>Cancel</button>
+    </form>
+</div>

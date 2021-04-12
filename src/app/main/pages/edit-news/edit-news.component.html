@@ -1,0 +1,206 @@
+<div class="page-layout simple tabbedm p-16 " id="deals">
+
+    <div id="" class="" fxLayout="row wrap">
+        <form name="newsForm" class="mat-elevation-z8 w-100-p p-16" [formGroup]="newsForm" novalidate>
+            <h1 *ngIf="id != 0">Edit News</h1>
+            <h1 *ngIf="id == 0">New News</h1>
+            <div class="new_branch">
+                <div class="w-100-p ">
+                    <mat-radio-group aria-label="Select an option" class="w-100-p " formControlName="istrending">
+                        <mat-radio-button value="1" [checked]="f.istrending.value == 1">Trending</mat-radio-button>
+                        <mat-radio-button value="0" [checked]="f.istrending.value == 0" class="mx-16">Not Trending
+                        </mat-radio-button>
+                    </mat-radio-group>
+                </div>
+                <div class="w-100-p mt-16">
+                    <mat-radio-group aria-label="Select an option" class="w-100-p" formControlName="type">
+                        <mat-radio-button value="0" [checked]="f.type.value == 0">Normal</mat-radio-button>
+                        <mat-radio-button value="1" [checked]="f.type.value == 1" class="mx-16">Banner
+                        </mat-radio-button>
+                    </mat-radio-group>
+                </div>
+                <mat-form-field appearance="outline" class="mt-16">
+                    <mat-label>English Title</mat-label>
+                    <input matInput formControlName="title_en">
+                    <mat-error>
+                        First title is required
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="w-100-p">
+                    <mat-label>Arabic Title</mat-label>
+                    <input matInput formControlName="title_ar">
+                    <mat-error>
+                        Arabic title is required
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="w-100-p">
+                    <mat-label>Arabic Source Name</mat-label>
+                    <input matInput formControlName="source_name_ar">
+                    <mat-error>
+                        Arabic Source Name is required
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="w-100-p">
+                    <mat-label>English Source Name</mat-label>
+                    <input matInput formControlName="source_name_en">
+                    <mat-error>
+                        English Source Name is required
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="w-100-p">
+                    <mat-label>Select Category</mat-label>
+                    <mat-select matNativeControl formControlName="category">
+                        <mat-option value="" selected></mat-option>
+                        <mat-option [value]="item._id" *ngFor="let item of categories">{{item.title_en}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <h4>English Description</h4>
+                <ckeditor required formControlName="description_en"
+
+                          [config]="ckeConfig" debounce="500">
+
+                </ckeditor>
+                <h4>Arabic Description</h4>
+
+                <ckeditor class="right" required formControlName="description_ar"
+
+                          [config]="ckeConfig" debounce="500">
+
+                </ckeditor>
+
+                <!--                <mat-form-field appearance="outline" class="w-100-p">-->
+                <!--                    <mat-label>English Description</mat-label>-->
+                <!--                    <textarea matInput formControlName="description_en"></textarea>-->
+                <!--                    <mat-error>-->
+                <!--                        Description is required-->
+                <!--                    </mat-error>-->
+                <!--                </mat-form-field>-->
+                <!--                <mat-form-field appearance="outline" class="w-100-p">-->
+                <!--                    <mat-label>English Description</mat-label>-->
+                <!--                    <textarea matInput formControlName="description_ar"></textarea>-->
+                <!--                    <mat-error>-->
+                <!--                        Description is required-->
+                <!--                    </mat-error>-->
+                <!--                </mat-form-field>-->
+                <fieldset>
+                    <legend><span class="start">*</span> Ads (at least one)</legend>
+
+                    <div *ngFor="let option of a.controls; let i = index; let first = first" class="options">
+                        <div [formGroup]="option" class="row ">
+                            <div>
+                                <mat-form-field appearance="outline" class="w-100-p">
+                                    <mat-label> English Title</mat-label>
+                                    <input formControlName="link" matInput>
+                                    <mat-error *ngIf="a.controls[i].get('link').errors">
+                                        <div *ngIf="a.controls[i].get('link').errors.required">
+                                            Link is required
+                                        </div>
+                                    </mat-error>
+                                </mat-form-field>
+
+                                <div class=" form-group ">
+                                    <h3><span class="required-star">*</span> Upload Photos </h3>
+                                    <div class="form-group">
+                                        <input type="file" (change)="openDialogGif($event , i)"
+                                               class="submit-button    " accept="image/gif"
+                                               name="image">
+                                    </div>
+                                    <div class="images w-100-p d-flex" *ngIf="a.value[i].url">
+                                        <div class="my-16 position-relative mx-16">
+                                            <img class=" position-absolute close"
+                                                 src="assets/images/logos/close.png">
+                                            <img class="shop-img" [src]="restService.baseUrl  + a.value[i].url" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <button (click)="cancelAds(option) " *ngIf="!first" class="submit-button"
+                                        mat-raised-button>
+                                    Cancel
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <a (click)="addMoreAds()" class="submit-button w-auto mt-16" mat-raised-button>
+                        ADD more Ads
+                    </a>
+                </fieldset>
+
+                <div class="mb-16">
+                    <h2>Source link</h2>
+                    <mat-radio-group aria-label="Select an option ">
+                        <mat-radio-button class="mx-16" [checked]="f.source_link.value == 'https://instagram.com'"
+                                          (click)="f.source_link.setValue('https://instagram.com')"
+                                          value="1">Instagram
+                        </mat-radio-button>
+                        <mat-radio-button class="mx-16" [checked]="f.source_link.value == 'https://facebook.com'"
+                                          (click)="f.source_link.setValue('https://facebook.com')"
+                                          value="2">FaceBook
+                        </mat-radio-button>
+                        <mat-radio-button [checked]="f.source_link.value == 'https://twitter.com'"
+                                          (click)="f.source_link.setValue('https://twitter.com')" value="0">
+                            Tweeter
+                        </mat-radio-button>
+                    </mat-radio-group>
+                </div>
+                <mat-form-field appearance="fill">
+                    <mat-label>Choose a date</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="dateTime" readonly>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+
+                <div class=" form-group mt-32" *ngIf="f.type.value == 1">
+                    <h3><span class="required-star">*</span> Upload Cover </h3>
+                    <div class="form-group">
+                        <input type="file" (change)="uploadCover($event)" class="submit-button    " accept="image/*"
+                               name="image">
+                    </div>
+                    <div class="images w-100-p d-flex">
+                        <img class="shop-img" [src]="restService.baseUrl + '/uploads/medium/' + f.cover_imaage.value"
+                             alt="">
+                    </div>
+                </div>
+
+                <div class="upload-file form-group mt-24">
+                    <h3><span class="required-star">*</span> Upload Photos </h3>
+                    <div class="form-group">
+                        <button (click)="openDialog('images' , 0)" class="submit-button   upload "
+                                name="image">Upload Image
+                        </button>
+                    </div>
+                    <div class="images w-100-p d-flex">
+                        <div class="my-16 position-relative mx-16" *ngFor="let item of f.images.value">
+                            <img class=" position-absolute close" (click)="deleteImage(item)"
+                                 src="assets/images/logos/close.png">
+                            <img class="shop-img" [src]="restService.baseUrl + '/uploads/medium/' + item" alt="">
+                        </div>
+                    </div>
+                </div>
+
+
+                <!--                <div>-->
+                <!--                    <span class="star">*</span> <input type="file" accept="image/*" (change)="onUpload($event)"/>-->
+
+                <!--                </div>-->
+                <div class="col-md-12 mt-48">
+                    <button mat-raised-button color="accent" class="submit-button " aria-label="ADD" *ngIf="id != 0"
+                            [disabled]="(newsForm.invalid  ||( f.type.value == 1 && !f.cover_imaage.value))"
+                            (click)="onSubmit()">
+                        Edit
+                    </button>
+                    <button mat-raised-button color="accent" class="submit-button " aria-label="ADD" *ngIf="id == 0"
+                            [disabled]="(newsForm.invalid  ||( f.type.value == 1 && !f.cover_imaage.value))"
+                            (click)="addNews()  "
+                    >
+                        Add
+                    </button>
+
+                </div>
+
+            </div>
+        </form>
+
+    </div>
+
+
+</div>
