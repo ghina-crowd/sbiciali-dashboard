@@ -33,10 +33,13 @@ export class ServiceProvidersComponent implements OnInit {
     }
 
     applyFilter(filterValue: string) {
-        if (this.pageEvent) {
-            this.pageEvent.pageIndex = 0;
-        }
-        this.getUsers();
+        // if (this.pageEvent) {
+        //     this.pageEvent.pageIndex = 0;
+        // }
+        // this.getUsers();
+
+        this.dataSource.filter = filterValue.trim().toLowerCase();
+
     }
 
     getUsers() {
@@ -59,12 +62,45 @@ export class ServiceProvidersComponent implements OnInit {
         });
     }
 
+    deleteUserConfirm(id) {
+        // tslint:disable-next-line:prefer-const
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'Are you sure you want to delete this user ?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, keep it'
+        })
+            .then(result => {
+                if (result.value) {
+                    this.deleteUser(id);
+
+                }
+            });
+    }
+
+    deleteUser(id) {
+        // tslint:disable-next-line:prefer-const
+        this.restService.deleteUser(id).then((res) => {
+            this.dataSource.filteredData = this.dataSource.filteredData.filter(item => item._id !== id);
+            this.dataSource = new MatTableDataSource(this.dataSource.filteredData);
+
+        }).catch((err: HttpErrorResponse) => {
+            if (err.status) {
+                this.toastr.error(err.error.message, '');
+                if (err.error.code === 401) {
+                    this.restService.refreshTokenUser();
+                }
+            }
+        });
+    }
+
 
     activeBlock(data: UserModel, status) {
         // tslint:disable-next-line:prefer-const
         data.active = status;
         this.restService.editUser(data).then((res) => {
-            if (res.code === 200) {
                 let index = this.users.findIndex(item => item._id == data._id);
                 this.users[index].active = status;
                 this.dataSource = new MatTableDataSource(this.users);
@@ -74,9 +110,7 @@ export class ServiceProvidersComponent implements OnInit {
                     'the user status has been updated.',
                     'success'
                 );
-            } else {
-                this.toastr.error(res.message, '');
-            }
+
         }).catch((err: HttpErrorResponse) => {
             if (err.status) {
                 this.toastr.error(err.error.message, '');

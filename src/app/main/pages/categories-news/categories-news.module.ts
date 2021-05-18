@@ -12,6 +12,7 @@ import {MatSortModule} from "@angular/material/sort";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatSelectModule} from "@angular/material/select";
 import {CategoriesNewsComponent} from "./categories-news.component";
+import {_MatMenuDirectivesModule, MatMenuModule} from "@angular/material/menu";
 
 const routes = [
     {
@@ -32,12 +33,14 @@ const routes = [
         MatButtonModule,
         MatIconModule,
         MatFormFieldModule,
-        MatInputModule ,
+        MatInputModule,
         FuseSharedModule,
         MatTableModule,
         MatSortModule,
         MatPaginatorModule,
-        MatSelectModule
+        MatSelectModule,
+        _MatMenuDirectivesModule,
+        MatMenuModule
     ]
 })
 export class CategoriesNewsModule { }

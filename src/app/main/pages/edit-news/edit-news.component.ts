@@ -77,7 +77,6 @@ export class EditNewsComponent implements OnInit {
             advertising: this._formBuilder.array([]),
         });
 
-        this.addMoreAds();
     }
 
     cancelAds(form: AbstractControl) {
@@ -138,8 +137,7 @@ export class EditNewsComponent implements OnInit {
     }
 
     addNews() {
-        // this.f.desctiption_en.setValue(this.decodeHTMLEntities( this.f.description_en.value));
-        // this.f.desctiption_ar.setValue(this.decodeHTMLEntities( this.f.desctiption_ar.value));
+
         let model: NewsModel = this.newsForm.value as NewsModel;
         this.restService.addNews(model).then((res) => {
             this.details = res.results;
@@ -147,6 +145,7 @@ export class EditNewsComponent implements OnInit {
             this.f.active.setValue('1');
             this.images = [];
             this.toastr.success('added successfully', '');
+            window.location.reload();
 
         }).catch((err: HttpErrorResponse) => {
             if (err.status) {
@@ -240,6 +239,10 @@ export class EditNewsComponent implements OnInit {
             this.details = res;
             this.newsForm.patchValue(this.details);
             this.f.active.setValue(this.f.active.value.toString());
+            this.details.advertising.forEach( data => {
+                this.addMoreAds();
+                this.f.advertising.patchValue(this.details.advertising);
+            });
             this.images = this.f.images.value;
         }).catch((err: HttpErrorResponse) => {
             if (err.status) {
@@ -261,6 +264,8 @@ export class EditNewsComponent implements OnInit {
                 this.getNewsDetails();
             } else {
                 this.f.link.setValue('text');
+                this.addMoreAds();
+
             }
         });
 

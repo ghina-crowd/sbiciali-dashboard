@@ -2,15 +2,22 @@
 
     <div  class="row  header w-100-p ">
         <div class="" fxFlex="0 1 auto" fxLayout="row" fxLayoutAlign="start center">
-
-            <button mat-button [matMenuTriggerFor]="userMenu"
+            <button mat-button (click)="logout()"
                     class="user-button">
                 <div fxLayout="row" fxLayoutAlign="center center">
-<!--                    <img class="avatar mr-0 mr-sm-16" src="assets/images/avatars/Velazquez.jpg">-->
-                    <span class="username mr-12" fxHide fxShow.gt-sm>Admin</span>
-                    <mat-icon class="s-16" fxHide.xs>keyboard_arrow_down</mat-icon>
+                    <span class="username mr-12" fxHide fxShow.lt-xl>Logout</span>
+                    <mat-icon>exit_to_app</mat-icon>
                 </div>
             </button>
+
+<!--            <button mat-button [matMenuTriggerFor]="userMenu"-->
+<!--                    class="user-button">-->
+<!--                <div fxLayout="row" fxLayoutAlign="center center">-->
+<!--&lt;!&ndash;                    <img class="avatar mr-0 mr-sm-16" src="assets/images/avatars/Velazquez.jpg">&ndash;&gt;-->
+<!--                    <span class="username mr-12" fxHide fxShow.gt-sm>Admin</span>-->
+<!--                    <mat-icon class="s-16" fxHide.xs>keyboard_arrow_down</mat-icon>-->
+<!--                </div>-->
+<!--            </button>-->
 
 
 

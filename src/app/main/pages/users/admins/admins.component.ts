@@ -15,7 +15,7 @@ import {PaginationModel} from "../../../../../models/pagination.model";
 export class AdminsComponent implements OnInit {
 
 
-    displayedColumns: string[] = ['user_admin_id', 'first_name', 'last_name', 'email', 'phone' ,  'active', 'action'];
+    displayedColumns: string[] = [ 'first_name', 'last_name', 'email', 'phone' ,  'active', 'action'];
     dataSource: any;
     pageEvent: PageEvent;
     pageSize = 12;
@@ -33,10 +33,47 @@ export class AdminsComponent implements OnInit {
     }
 
     applyFilter(filterValue: string) {
-        if (this.pageEvent) {
-            this.pageEvent.pageIndex = 0;
-        }
-        this.getUsers();
+        // if (this.pageEvent) {
+        //     this.pageEvent.pageIndex = 0;
+        // }
+        //
+        // this.getUsers();
+        this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    }
+
+    deleteUserConfirm(id) {
+        // tslint:disable-next-line:prefer-const
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'Are you sure you want to delete this user ?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, keep it'
+        })
+            .then(result => {
+                if (result.value) {
+                    this.deleteUser(id);
+
+                }
+            });
+    }
+
+    deleteUser(id) {
+        // tslint:disable-next-line:prefer-const
+        this.restService.deleteUser(id).then((res) => {
+            this.dataSource.filteredData = this.dataSource.filteredData.filter(item => item._id !== id);
+            this.dataSource = new MatTableDataSource(this.dataSource.filteredData);
+
+        }).catch((err: HttpErrorResponse) => {
+            if (err.status) {
+                this.toastr.error(err.error.message, '');
+                if (err.error.code === 401) {
+                    this.restService.refreshTokenUser();
+                }
+            }
+        });
     }
 
     getUsers() {

@@ -12,6 +12,7 @@ import {MatSortModule} from "@angular/material/sort";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {CategoriesComponent} from "./categories.component";
 import {MatSelectModule} from "@angular/material/select";
+import {_MatMenuDirectivesModule, MatMenuModule} from "@angular/material/menu";
 
 
 const routes = [
@@ -27,18 +28,20 @@ const routes = [
 
 @NgModule({
   declarations: [CategoriesComponent],
-  imports: [
-      RouterModule.forChild(routes),
-      CommonModule,
-      MatButtonModule,
-      MatIconModule,
-      MatFormFieldModule,
-      MatInputModule ,
-      FuseSharedModule,
-      MatTableModule,
-      MatSortModule,
-      MatPaginatorModule,
-      MatSelectModule
-  ]
+    imports: [
+        RouterModule.forChild(routes),
+        CommonModule,
+        MatButtonModule,
+        MatIconModule,
+        MatFormFieldModule,
+        MatInputModule,
+        FuseSharedModule,
+        MatTableModule,
+        MatSortModule,
+        MatPaginatorModule,
+        MatSelectModule,
+        MatMenuModule,
+        _MatMenuDirectivesModule
+    ]
 })
 export class CategoriesModule { }

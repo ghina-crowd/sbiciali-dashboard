@@ -5,7 +5,6 @@ import {takeUntil} from 'rxjs/operators';
 import {fuseAnimations} from '@fuse/animations';
 import {ProfileService} from 'app/main/pages/profile/profile.service';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {confirmPasswordValidator} from "../../../authentication/reset-password/reset-password.component";
 import {HttpErrorResponse} from "@angular/common/http";
 import {DataService} from "../../../../../../services/data.service";
 import {ToastrService} from "ngx-toastr";
@@ -89,7 +88,7 @@ export class ProfileAboutComponent implements OnInit, OnDestroy {
         let userModel: UserModel = this.personalInformation.value as UserModel;
         if (userModel.password == '' && userModel.currentPassword == '' || userModel.password != '' && userModel.currentPassword != '') {
             this.restService.editProfile(userModel).then((res) => {
-                this.toastr.success('', '');
+                this.toastr.success('Success', '');
             }).catch((err: HttpErrorResponse) => {
                if (err.status) {
                 this.toastr.error(err.error.message, '');

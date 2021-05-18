@@ -103,6 +103,7 @@ export class EditContentComponent implements OnInit {
             this.data.content_ar = this.decode(this.data.content_ar);
             this.data.content_en = this.decode(this.data.content_en);
             this.contentForm.patchValue(this.data);
+            console.log(this.contentForm.controls);
             this.ckeConfig = {
                 allowedContent: false,
                 extraPlugins: 'divarea',

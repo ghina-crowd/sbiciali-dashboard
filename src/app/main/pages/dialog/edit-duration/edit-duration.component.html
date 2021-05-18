@@ -1,9 +1,9 @@
 <div id="new_branch" class="page-layout simple tabbed">
 
     <div id="" class="edit-dialog" fxLayout="row wrap">
-        <form name="providerForm" class="d-flex flex-column   my-10" [formGroup]="durationForm" novalidate>
-            <h1 *ngIf="data">Edit Duration</h1>
-            <h1 *ngIf="!data">New Duration</h1>
+        <form name="providerForm" class="my-10" [formGroup]="durationForm" novalidate>
+            <h1 *ngIf="data" class="w-100-p">Edit Duration</h1>
+            <h1 *ngIf="!data" class="w-100-p">New Duration</h1>
             <div class="new_branch">
 
 

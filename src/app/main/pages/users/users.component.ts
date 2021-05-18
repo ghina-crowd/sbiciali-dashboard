@@ -9,16 +9,11 @@ import {ToastrService} from "ngx-toastr";
 })
 export class UsersComponent implements OnInit {
 
-
-
-
     constructor(private restService: DataService,
                 private toastr: ToastrService) {
-
     }
 
 
     ngOnInit() {
-
     }
 }

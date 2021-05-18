@@ -18,6 +18,7 @@ import {MatTabsModule} from "@angular/material/tabs";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {NormalUserComponent} from "./normal-user/normal-user.component";
 import {AdminsComponent} from "./admins/admins.component";
+import {MatMenuModule} from "@angular/material/menu";
 
 
 const routes = [
@@ -53,6 +54,7 @@ const routes = [
         FuseSharedModule,
         MatDatepickerModule,
         MatSelectModule,
+        MatMenuModule,
 
     ]
 })

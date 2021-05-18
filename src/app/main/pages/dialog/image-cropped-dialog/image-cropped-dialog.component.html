@@ -1,4 +1,4 @@
-<div class="container-fluid croppe-dialog">
+<div class="container-fluid croppe-dialog mb-16">
     <div class="row position-relative">
         <div class=" position-absolute close-button" (click)="dialog.closeAll()" style="cursor: pointer">X</div>
         <div class="col-md-12">
@@ -30,7 +30,7 @@
                     [imageChangedEvent]="imageChangedEvent"
                     [maintainAspectRatio]="true"
                     [containWithinAspectRatio]="containWithinAspectRatio"
-                    [aspectRatio]="4 / 3"
+                    [aspectRatio]="4 / 4"
                     [resizeToWidth]="1200"
                     [resizeToHeight]="1200"
                     [cropperMinWidth]="800"
@@ -50,7 +50,7 @@
             </div>
         </div>
 
-        <div class="col-md-12">
+        <div class="col-md-12 ">
             <button class="btn btn-primary mx-8  w-100-p upload" (click)="onSubmit()" *ngIf="croppedImage">Done</button>
         </div>
     </div>

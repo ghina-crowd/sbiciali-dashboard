@@ -9,6 +9,7 @@ import {MatTableDataSource} from "@angular/material/table";
 import {EditTypeComponent} from "../dialog/edit-type/edit-type.component";
 import {CountryModel} from "../../../../models/country.model";
 import {EditCountryComponent} from "../dialog/edit-country/edit-country.component";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-countries',
@@ -18,7 +19,7 @@ import {EditCountryComponent} from "../dialog/edit-country/edit-country.componen
 export class CountriesComponent implements OnInit {
 
 
-    displayedColumns: string[] = ['_id', 'name_en', 'name_ar' , 'image' , 'status', 'action'];
+    displayedColumns: string[] = [ 'name_en', 'name_ar' , 'image' , 'status', 'action'];
     dataSource: any;
     page = 0;
     types: TypeModel[] = [];
@@ -38,6 +39,40 @@ export class CountriesComponent implements OnInit {
         this.dataSource.filter = filterValue.trim().toLowerCase();
     }
 
+
+    deleteConfirm(id) {
+        // tslint:disable-next-line:prefer-const
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'Are you sure you want to country this user ?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, keep it'
+        })
+            .then(result => {
+                if (result.value) {
+                    this.deleteCountry(id);
+
+                }
+            });
+    }
+
+    deleteCountry(id) {
+        // tslint:disable-next-line:prefer-const
+        this.restService.deleteCountry(id).then((res) => {
+            this.dataSource.filteredData = this.dataSource.filteredData.filter(item => item._id !== id);
+            this.dataSource = new MatTableDataSource(this.dataSource.filteredData);
+
+        }).catch((err: HttpErrorResponse) => {
+            if (err.status) {
+                this.toastr.error(err.error.message, '');
+                if (err.error.code === 401) {
+                    this.restService.refreshTokenUser();
+                }
+            }
+        });
+    }
 
     updateCountry(country: CountryModel, value) {
         // tslint:disable-next-line:prefer-const

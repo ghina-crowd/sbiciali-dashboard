@@ -12,6 +12,7 @@ import {MatSortModule} from "@angular/material/sort";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatSelectModule} from "@angular/material/select";
 import {UnitesComponent} from "./unites.component";
+import {MatMenuModule} from "@angular/material/menu";
 
 
 const routes = [
@@ -30,12 +31,13 @@ const routes = [
         MatButtonModule,
         MatIconModule,
         MatFormFieldModule,
-        MatInputModule ,
+        MatInputModule,
         FuseSharedModule,
         MatTableModule,
         MatSortModule,
         MatPaginatorModule,
-        MatSelectModule
+        MatSelectModule,
+        MatMenuModule
     ]
 })
 export class UnitesModule { }

@@ -18,14 +18,14 @@
         <div class="mt-16">
             <mat-form-field appearance="fill">
                 <mat-label>Type</mat-label>
-                <mat-select    formControlName="type">
-                    <mat-option value="1">about services</mat-option>
-                    <mat-option value="2">Video live</mat-option>
-                    <mat-option value="3">Ads request</mat-option>
-                    <mat-option value="4">Events</mat-option>
-                    <mat-option value="5">Hour with Star</mat-option>
-                    <mat-option value="6">Terms&condition</mat-option>
-                    <mat-option value="7">Privacy Policy</mat-option>
+                <mat-select    formControlName="type" [value]="f.type.value">
+                    <mat-option value="1" >about services</mat-option>
+                    <mat-option value="2" >Video live</mat-option>
+                    <mat-option value="3" >Ads request</mat-option>
+                    <mat-option value="4" >Events</mat-option>
+                    <mat-option value="5" >Hour with Star</mat-option>
+                    <mat-option value="6" >Terms&condition</mat-option>
+                    <mat-option value="7" >Privacy Policy</mat-option>
                 </mat-select>
             </mat-form-field>
         </div>

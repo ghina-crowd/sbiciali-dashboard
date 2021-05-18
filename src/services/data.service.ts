@@ -218,6 +218,30 @@ export class DataService extends ApiService {
         return this.restRequest(null, `${this.baseUrl}/v1/unit/${id}`, null, type, null);
     }
 
+    deleteCategory(id: string, type: string = 'Delete') {
+        return this.restRequest(null, `${this.baseUrl}/v1/category/${id}`, null, type, null);
+    }
+
+    deleteType(id: string, type: string = 'Delete') {
+        return this.restRequest(null, `${this.baseUrl}/v1/type/${id}`, null, type, null);
+    }
+
+    deleteCountry(id: string, type: string = 'Delete') {
+        return this.restRequest(null, `${this.baseUrl}/v1/country/${id}`, null, type, null);
+    }
+
+    deleteUser(id: string, type: string = 'Delete') {
+        return this.restRequest(null, `${this.baseUrl}/v1/users/${id}`, null, type, null);
+    }
+
+    deleteNews(id: string, type: string = 'Delete') {
+        return this.restRequest(null, `${this.baseUrl}/v1/news/${id}`, null, type, null);
+    }
+
+    deleteCategoryNews(id: string, type: string = 'Delete') {
+        return this.restRequest(null, `${this.baseUrl}/v1/news/category/${id}`, null, type, null);
+    }
+
     deleteDuration(id: string, type: string = 'Delete') {
         return this.restRequest(null, `${this.baseUrl}/v1/duration/${id}`, null, type, null);
     }
@@ -240,7 +264,9 @@ export class DataService extends ApiService {
             localStorage.setItem('auth_sbisiali_admin_refresh', res.refresh.token);
         }).catch((err: HttpErrorResponse) => {
             if (err.status) {
-                // this.toastr.error(err.error.message, '');
+                localStorage.removeItem('auth_sbisiali_admin');
+                localStorage.removeItem('auth_sbisiali_admin_refresh');
+                window.location.href = '/pages/login';
             }
         });
     }

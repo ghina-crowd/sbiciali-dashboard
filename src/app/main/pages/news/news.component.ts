@@ -8,6 +8,7 @@ import {ToastrService} from "ngx-toastr";
 import {PaginationModel} from "../../../../models/pagination.model";
 import {NewsModel} from "../../../../models/news.model";
 import {PageEvent} from "@angular/material/paginator";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-news',
@@ -17,7 +18,7 @@ import {PageEvent} from "@angular/material/paginator";
 export class NewsComponent implements OnInit {
 
     pagination = new PaginationModel();
-    displayedColumns: string[] = ['_id', 'title_ar', 'title_en', 'status' , 'action'];
+    displayedColumns: string[] = ['title_ar', 'title_en', 'status' , 'action'];
     dataSource: any;
     page = 0;
     news: NewsModel[] = [];
@@ -44,6 +45,40 @@ export class NewsComponent implements OnInit {
            if (err.status) {
                 this.toastr.error(err.error.message, '');
                 if(err.error.code === 401) {
+                    this.restService.refreshTokenUser();
+                }
+            }
+        });
+    }
+
+    deleteConfirm(id) {
+        // tslint:disable-next-line:prefer-const
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'Are you sure you want to delete this news ?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, keep it'
+        })
+            .then(result => {
+                if (result.value) {
+                    this.deleteNews(id);
+
+                }
+            });
+    }
+
+    deleteNews(id) {
+        // tslint:disable-next-line:prefer-const
+        this.restService.deleteNews(id).then((res) => {
+            this.dataSource.filteredData = this.dataSource.filteredData.filter(item => item._id !== id);
+            this.dataSource = new MatTableDataSource(this.dataSource.filteredData);
+
+        }).catch((err: HttpErrorResponse) => {
+            if (err.status) {
+                this.toastr.error(err.error.message, '');
+                if (err.error.code === 401) {
                     this.restService.refreshTokenUser();
                 }
             }

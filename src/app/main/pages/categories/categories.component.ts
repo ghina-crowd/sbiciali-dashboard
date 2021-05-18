@@ -8,6 +8,7 @@ import {ToastrService} from "ngx-toastr";
 import {MatTableDataSource} from "@angular/material/table";
 import {HttpErrorResponse} from "@angular/common/http";
 import {EditCategoryComponent} from "../dialog/edit-category/edit-category.component";
+import Swal from "sweetalert2";
 
 @Component({
     selector: 'app-categories',
@@ -16,7 +17,7 @@ import {EditCategoryComponent} from "../dialog/edit-category/edit-category.compo
 })
 export class CategoriesComponent implements OnInit {
 
-    displayedColumns: string[] = ['category_id', 'name_en', 'name_ar', 'image', 'status', 'action'];
+    displayedColumns: string[] = [ 'name_en', 'name_ar', 'image', 'status', 'action'];
     dataSource: any;
     page = 0;
     categories: Category[] = [];
@@ -69,6 +70,42 @@ export class CategoriesComponent implements OnInit {
             }
         });
     }
+
+
+    deleteCategoryConfirm(id) {
+        // tslint:disable-next-line:prefer-const
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'Are you sure you want to category this user ?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, keep it'
+        })
+            .then(result => {
+                if (result.value) {
+                    this.deleteCategory(id);
+
+                }
+            });
+    }
+
+    deleteCategory(id) {
+        // tslint:disable-next-line:prefer-const
+        this.restService.deleteCategory(id).then((res) => {
+            this.dataSource.filteredData = this.dataSource.filteredData.filter(item => item._id !== id);
+            this.dataSource = new MatTableDataSource(this.dataSource.filteredData);
+
+        }).catch((err: HttpErrorResponse) => {
+            if (err.status) {
+                this.toastr.error(err.error.message, '');
+                if (err.error.code === 401) {
+                    this.restService.refreshTokenUser();
+                }
+            }
+        });
+    }
+
 
     openEditDialog(category: Category) {
         let dialog = this.dialog.open(EditCategoryComponent);

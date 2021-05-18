@@ -10,13 +10,7 @@
             <img src="https://img.icons8.com/ultraviolet/40/000000/add.png"> Add New Unit
         </button>
     </div>
-    <table [dataSource]="dataSource" class="mat-elevation-z8 w-100-p p-16" mat-table>
-
-        <!-- Position Column -->
-        <ng-container matColumnDef="_id" class="">
-            <th *matHeaderCellDef mat-header-cell> No.</th>
-            <td *matCellDef="let element" mat-cell> {{element._id}} </td>
-        </ng-container>
+    <table [dataSource]="dataSource" class="mat-elevation-z8 table-responsive w-100-p p-16" mat-table>
 
         <ng-container matColumnDef="name_en" class="">
             <th *matHeaderCellDef mat-header-cell> English Title</th>
@@ -28,20 +22,26 @@
             <td *matCellDef="let element" mat-cell> {{element.title_ar}}  </td>
         </ng-container>
 
-
         <!-- Name Column -->
         <ng-container matColumnDef="action">
             <th *matHeaderCellDef mat-header-cell> Action</th>
             <td *matCellDef="let element" mat-cell>
-                <button aria-label="EDIT" class="submit-button action m-4" color="accent" mat-raised-button
-                        (click)="openEditDialog(element)">
-                    Edit
-                </button>
-                <button aria-label="EDIT" class="submit-button m-4 action" color="accent" mat-raised-button
-                        (click)="deleteUnit(element._id)" >
-                    Delete
-                </button>
 
+                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+
+                    <button mat-menu-item (click)="openEditDialog(element)">
+                        <mat-icon>edit</mat-icon>
+                        <span>Edit</span>
+                    </button>
+                    <button mat-menu-item (click)="deleteUnit(element._id)" >
+                        <mat-icon>delete_sweep</mat-icon>
+                        <span>Delete</span>
+                    </button>
+
+                </mat-menu>
             </td>
         </ng-container>
         <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>

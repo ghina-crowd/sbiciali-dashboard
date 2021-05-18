@@ -7,7 +7,7 @@
             </mat-form-field>
 
         </div>
-        <table [dataSource]="dataSource" class="mat-elevation-z8 w-100-p p-16" mat-table>
+        <table [dataSource]="dataSource" class="mat-elevation-z8 table-responsive w-100-p p-16" mat-table>
 
 
             <!-- Name Column -->
@@ -42,19 +42,31 @@
             <ng-container matColumnDef="action">
                 <th *matHeaderCellDef mat-header-cell> Action</th>
                 <td *matCellDef="let element" mat-cell class="py-8">
+                    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                        <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu">
 
-                    <button aria-label="details" *ngIf="element.active == 2" class="submit-button mx-4 my-4" color="accent"
-                            mat-raised-button (click)="confirmeActiveBlock(element , 1)">
-                        Unblock
-                    </button>
-                    <button aria-label="details" *ngIf="element.active !== 2" class="submit-button mx-4 my-4" color="accent"
-                            mat-raised-button (click)="confirmeActiveBlock(element , 2)">
-                        Block
-                    </button>
-                    <button aria-label="details" class="submit-button mx-4 my-4" color="accent" mat-raised-button
-                            [routerLink]="'/pages/new-user/' + element._id">
-                        Edit
-                    </button>
+                        <button mat-menu-item  [routerLink]="'/pages/new-user/' + element._id">
+                            <mat-icon>edit</mat-icon>
+                            <span>Edit</span>
+                        </button>
+
+                        <button mat-menu-item (click)="confirmeActiveBlock(element , 2)" *ngIf="element.active !== 2">
+                            <mat-icon>block</mat-icon>
+                            <span>Block</span>
+                        </button>
+                        <button mat-menu-item (click)="confirmeActiveBlock(element , 1)" *ngIf="element.active !== 1">
+                            <mat-icon>thumb_up</mat-icon>
+                            <span>Active</span>
+                        </button>
+                        <button mat-menu-item (click)="deleteUserConfirm(element._id)" >
+                            <mat-icon>delete_sweep</mat-icon>
+                            <span>Delete</span>
+                        </button>
+
+                    </mat-menu>
+
                 </td>
             </ng-container>
 

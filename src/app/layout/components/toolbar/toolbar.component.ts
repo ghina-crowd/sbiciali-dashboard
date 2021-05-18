@@ -100,7 +100,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
     logout() {
         localStorage.removeItem('auth_sbisiali_admin');
         localStorage.removeItem('auth_sbisiali_admin_refresh');
-        window.location.href = 'https://www.crowd-test.com/sbisiali-dashboard/#/pages/login';
+        window.location.href = '/pages/login';
     }
 
     /**

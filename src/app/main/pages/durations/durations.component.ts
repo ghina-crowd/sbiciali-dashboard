@@ -16,7 +16,7 @@ import {EditDurationComponent} from "../dialog/edit-duration/edit-duration.compo
 export class DurationsComponent implements OnInit {
 
 
-    displayedColumns: string[] = ['_id', 'duration', 'type', 'unit', 'action'];
+    displayedColumns: string[] = [ 'duration', 'type', 'unit', 'action'];
     dataSource: any;
     page = 0;
     types: DurationModel[] = [];
@@ -72,6 +72,7 @@ export class DurationsComponent implements OnInit {
         dialog.afterClosed().subscribe(result => {
             if (result) {
                 let index = this.dataSource.filteredData.indexOf(duration);
+                result.unit.title = result.unit.title_en;
                 this.dataSource.filteredData[index] = result;
                 this.dataSource = new MatTableDataSource(this.dataSource.filteredData);
             }
@@ -82,6 +83,7 @@ export class DurationsComponent implements OnInit {
         let dialog = this.dialog.open(EditDurationComponent);
         dialog.afterClosed().subscribe(result => {
             if (result) {
+                result.unit.title = result.unit.title_en;
                 this.dataSource.filteredData.push(result);
                 this.dataSource = new MatTableDataSource(this.dataSource.filteredData);
             }

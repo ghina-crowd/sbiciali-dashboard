@@ -1,12 +1,12 @@
 <div class="page-layout simple tabbedm p-16 categories" id="deals">
-    <h1>Categories</h1>
+    <h1>Content</h1>
     <div class="w-100-p">
         <mat-form-field class="w-25-p p-16 filter">
             <input (keyup)="applyFilter($event.target.value)" matInput placeholder="Search By Title">
         </mat-form-field>
 
     </div>
-    <table [dataSource]="dataSource" class="mat-elevation-z8 w-100-p p-16" mat-table>
+    <table [dataSource]="dataSource" class="mat-elevation-z8 table-responsive w-100-p p-16" mat-table>
 
         <!-- Position Column -->
         <ng-container matColumnDef="content" class="">
@@ -33,10 +33,16 @@
         <ng-container matColumnDef="action">
             <th *matHeaderCellDef mat-header-cell> Action</th>
             <td *matCellDef="let element" mat-cell>
-                <button aria-label="EDIT" class="submit-button action m-4" color="accent" mat-raised-button
-                        (click)="openEditDialog(element)">
-                    Edit
+                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                    <mat-icon>more_vert</mat-icon>
                 </button>
+                <mat-menu #menu="matMenu">
+
+                    <button mat-menu-item  (click)="openEditDialog(element)" >
+                        <mat-icon>edit</mat-icon>
+                        <span>Edit</span>
+                    </button>
+                </mat-menu>
             </td>
         </ng-container>
 

@@ -221,6 +221,7 @@ export class NewUserComponent implements OnInit {
         this.restService.editUser(model).then((res) => {
             this.f.active.setValue('1');
             this.toastr.success('success', '');
+            window.location.reload();
 
         }).catch((err: HttpErrorResponse) => {
             if (err.status) {
@@ -233,8 +234,8 @@ export class NewUserComponent implements OnInit {
     }
 
 
-    deleteImageUploaded(id) {
-        this.imagesUploaded = this.imagesUploaded.filter(item => item._id != id);
+    deleteImageUploaded(url) {
+        this.imagesUploaded = this.imagesUploaded.filter(item => item.url != url);
     }
 
     deleteImage(id) {

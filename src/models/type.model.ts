@@ -1,7 +1,7 @@
 import {Category} from "./category";
 
 export interface TypeModel {
-    category: Category;
+    category: any;
     active: number;
     title_en: string;
     title_ar: string;

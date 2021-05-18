@@ -16,7 +16,7 @@ import {EditUnitComponent} from "../dialog/edit-unit/edit-unit.component";
 export class UnitesComponent implements OnInit {
 
 
-    displayedColumns: string[] = ['_id', 'name_en', 'name_ar', 'action'];
+    displayedColumns: string[] = ['name_en', 'name_ar', 'action'];
     dataSource: any;
     page = 0;
     types: TypeModel[] = [];

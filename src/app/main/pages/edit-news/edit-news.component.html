@@ -1,7 +1,7 @@
 <div class="page-layout simple tabbedm p-16 " id="deals">
 
     <div id="" class="" fxLayout="row wrap">
-        <form name="newsForm" class="mat-elevation-z8 w-100-p p-16" [formGroup]="newsForm" novalidate>
+        <form name="newsForm" class="mat-elevation-z8 table-responsive w-100-p p-16" [formGroup]="newsForm" novalidate>
             <h1 *ngIf="id != 0">Edit News</h1>
             <h1 *ngIf="id == 0">New News</h1>
             <div class="new_branch">
@@ -107,8 +107,6 @@
                                     </div>
                                     <div class="images w-100-p d-flex" *ngIf="a.value[i].url">
                                         <div class="my-16 position-relative mx-16">
-                                            <img class=" position-absolute close"
-                                                 src="assets/images/logos/close.png">
                                             <img class="shop-img" [src]="restService.baseUrl  + a.value[i].url" alt="">
                                         </div>
                                     </div>
@@ -156,7 +154,7 @@
                                name="image">
                     </div>
                     <div class="images w-100-p d-flex">
-                        <img class="shop-img" [src]="restService.baseUrl + '/uploads/medium/' + f.cover_imaage.value"
+                        <img class="shop-img" [src]="restService.baseUrl + '/uploads/original/' + f.cover_imaage.value"
                              alt="">
                     </div>
                 </div>
@@ -172,7 +170,7 @@
                         <div class="my-16 position-relative mx-16" *ngFor="let item of f.images.value">
                             <img class=" position-absolute close" (click)="deleteImage(item)"
                                  src="assets/images/logos/close.png">
-                            <img class="shop-img" [src]="restService.baseUrl + '/uploads/medium/' + item" alt="">
+                            <img class="shop-img" [src]="restService.baseUrl + '/uploads/original/' + item" alt="">
                         </div>
                     </div>
                 </div>
