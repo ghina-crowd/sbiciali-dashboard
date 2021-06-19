@@ -157,6 +157,16 @@ export class EditNewsComponent implements OnInit {
         });
     }
 
+
+    decode(text: string): string {
+        var ret:string = "";
+        this.dummyElem.innerHTML = text;
+        document.body.appendChild(this.dummyElem);
+        ret = this.dummyElem.textContent; // just grap the decoded string which contains the desired HTML tags
+        document.body.removeChild(this.dummyElem);
+        return ret;
+    }
+
     onSubmit() {
         // let textEn = this.decodeHTMLEntities(this.f.description_en.value);
         // console.log(textEn);
@@ -237,7 +247,10 @@ export class EditNewsComponent implements OnInit {
     getNewsDetails() {
         this.restService.getNewsDetails(this.id).then((res) => {
             this.details = res;
+            this.details.description_ar = this.decode(res.description_ar)
+            this.details.description_en = this.decode(res.description_en)
             this.newsForm.patchValue(this.details);
+
             this.f.active.setValue(this.f.active.value.toString());
             this.details.advertising.forEach( data => {
                 this.addMoreAds();
