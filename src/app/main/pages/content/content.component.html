@@ -13,7 +13,7 @@
             <th *matHeaderCellDef mat-header-cell>Content</th>
             <td *matCellDef="let element" mat-cell  [innerHTML]="decode( element.content_ar) |  slice: 0 : 50">  </td>
         </ng-container>
-        
+
         <ng-container matColumnDef="type" class="">
             <th *matHeaderCellDef mat-header-cell> type </th>
             <td *matCellDef="let element" mat-cell>
